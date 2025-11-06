@@ -40,55 +40,60 @@
     position: relative;
     width: 300px;
     height: 150px;
-    margin: 0 auto 40px;
-    perspective: 1200px;
+    margin: 40px auto;
   }
 
-  /* Infinity Loop Shape */
+  /* Infinity Loop Structure */
   .loop {
     position: relative;
     width: 100%;
     height: 100%;
-    border: 8px solid #00ffc8;
-    border-radius: 50% 50% 0 50%;
-    box-shadow: 0 0 20px #00ffc8;
-    transform: rotate(45deg);
-    animation: spin 12s linear infinite;
   }
 
+  .loop::before,
   .loop::after {
     content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 8px solid #00ffc8;
-    border-radius: 50% 50% 0 50%;
+    width: 130px;
+    height: 130px;
+    border: 6px solid #00ffc8;
+    border-radius: 50%;
+    top: 10px;
     box-shadow: 0 0 20px #00ffc8;
-    transform: rotate(90deg);
   }
 
-  /* Infinity Loop Steps Inside */
+  .loop::before {
+    left: 0;
+  }
+
+  .loop::after {
+    right: 0;
+  }
+
+  /* DevOps Step Labels */
   .step {
     position: absolute;
     font-size: 0.9em;
     font-weight: bold;
     color: #00ffc8;
     text-shadow: 0 0 5px #00ffc8;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
   }
 
-  /* Position steps dynamically inside the loop */
-  .step1 { top: 10%; left: 5%; transform: rotate(-20deg); }   /* Code */
-  .step2 { top: 5%; left: 55%; transform: rotate(20deg); }   /* Build */
-  .step3 { top: 40%; left: 80%; transform: rotate(45deg); }  /* Test */
-  .step4 { top: 70%; left: 55%; transform: rotate(70deg); }  /* Deploy */
-  .step5 { top: 60%; left: 5%; transform: rotate(-45deg); }  /* Monitor */
-  .step6 { top: 35%; left: 35%; transform: rotate(0deg); }   /* Repeat */
-
-  /* Animation for spinning */
-  @keyframes spin {
-    from { transform: rotate(45deg); }
-    to { transform: rotate(405deg); }
+  .step:hover {
+    color: #0a1930;
+    text-shadow: 0 0 20px #00ffc8, 0 0 40px #00ffc8;
+    transform: scale(1.2);
   }
+
+  /* Step positions inside the loop */
+  .step1 { top: 10%; left: 15%; }   /* Code */
+  .step2 { top: 10%; right: 15%; }  /* Build */
+  .step3 { top: 45%; right: 5%; }   /* Test */
+  .step4 { bottom: 10%; right: 25%; } /* Deploy */
+  .step5 { bottom: 10%; left: 25%; }  /* Monitor */
+  .step6 { top: 45%; left: 5%; }    /* Repeat */
 
   /* Button Styling */
   .btn-launch {
@@ -110,14 +115,13 @@
     background-color: #00ffc8;
     color: #002c27;
   }
-
 </style>
 </head>
 <body>
 
   <h1>🚀 Welcome to the <span style="color:#64fff2;">NIT Academy DevOps Innovation Lab</span></h1>
   <p class="subtitle">Where Ideas Build. Pipelines Flow. Deployments Fly.</p>
-  <p class="highlight">Master the art of <strong>Code → Build → Deploy → Scale</strong></p>
+  <p class="highlight">Master the art of Code → Build → Deploy → Scale</p>
 
   <div class="infinity-wrapper" aria-label="DevOps Infinity Loop">
     <div class="loop">
@@ -130,9 +134,13 @@
     </div>
   </div>
 
-  <p style="color:#a3fff4; font-weight: 600; margin-bottom: 10px;">✅ JSP environment is live and futuristic!</p>
+  <p style="color:#a3fff4; font-weight: 600; margin-bottom: 10px;">
+    ✅ JSP environment is live and futuristic!
+  </p>
 
-  <a href="<%= request.getContextPath() %>/webapp/hello" class="btn-launch" role="button" aria-label="Launch servlet">Launch Servlet</a>
+  <a href="<%= request.getContextPath() %>/webapp/hello" class="btn-launch" role="button" aria-label="Launch servlet">
+    Launch Servlet
+  </a>
 
 </body>
 </html>
