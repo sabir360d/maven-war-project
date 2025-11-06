@@ -1,99 +1,196 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: black;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIT Academy | DevOps Innovation Lab</title>
+    <style>
+        /* --- Background Animation --- */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-* {
-  box-sizing: border-box;
-}
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(-45deg, #0a192f, #172a45, #1e3c72, #2a5298);
+            background-size: 400% 400%;
+            animation: gradientFlow 12s ease infinite;
+            color: #e6f1ff;
+            text-align: center;
+            margin: 0;
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
 
-/* Add padding to containers */
-.container {
-  padding: 16px;
-  background-color: white;
-}
+        h1 {
+            font-size: 3em;
+            color: #64ffda;
+            text-shadow: 0 0 15px rgba(100, 255, 218, 0.6);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
 
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
+        h2 {
+            font-weight: 400;
+            font-size: 1.5em;
+            color: #a8b2d1;
+            margin-top: 10px;
+            animation: fadeIn 2s ease-in-out;
+        }
 
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+        .highlight {
+            color: #00ffff;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
 
-/* Overwrite default styles of hr */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
+        /* --- Infinity Loop Container --- */
+        .infinity-wrapper {
+            position: relative;
+            width: 250px;
+            height: 120px;
+            margin: 60px auto 40px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            animation: float 6s ease-in-out infinite;
+        }
 
-/* Set a style for the submit button */
-.registerbtn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-.registerbtn:hover {
-  opacity: 1;
-}
+        /* --- The Loop Shape --- */
+        .loop {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid #64ffda;
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(45deg);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.6);
+            animation: spin 10s linear infinite;
+        }
 
-/* Add a blue text color to links */
-a {
-  color: dodgerblue;
-}
+        .loop::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid #64ffda;
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(90deg);
+        }
 
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
-  text-align: center;
-}
-</style>
+        @keyframes spin {
+            from { transform: rotate(0deg) scale(1); }
+            to { transform: rotate(360deg) scale(1); }
+        }
+
+        /* --- Lifecycle Labels --- */
+        .label {
+            position: absolute;
+            font-size: 0.9em;
+            color: #64ffda;
+            text-shadow: 0 0 5px rgba(100,255,218,0.7);
+            animation: orbit 10s linear infinite;
+            transform-origin: 50% 80px;
+        }
+
+        .label span {
+            background: rgba(10, 25, 47, 0.8);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(100,255,218,0.4);
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .label:nth-child(1) { transform: rotate(0deg) translateY(-90px); }
+        .label:nth-child(2) { transform: rotate(60deg) translateY(-90px); }
+        .label:nth-child(3) { transform: rotate(120deg) translateY(-90px); }
+        .label:nth-child(4) { transform: rotate(180deg) translateY(-90px); }
+        .label:nth-child(5) { transform: rotate(240deg) translateY(-90px); }
+        .label:nth-child(6) { transform: rotate(300deg) translateY(-90px); }
+
+        /* --- CTA Button --- */
+        .cta {
+            margin-top: 60px;
+            font-size: 1.2em;
+            animation: fadeInUp 2.5s ease-in-out;
+        }
+
+        a {
+            color: #64ffda;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            border: 2px solid #64ffda;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+        }
+
+        a:hover {
+            color: #0a192f;
+            background: #64ffda;
+            box-shadow: 0 0 25px rgba(100, 255, 218, 0.8);
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 80px;
+            font-size: 0.9em;
+            color: #8892b0;
+            animation: fadeIn 3s ease-in-out;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
+    <h1>🚀 Welcome to the <span class="highlight">NIT Academy DevOps Innovation Lab</span></h1>
+    <h2>Where Ideas Build. Pipelines Flow. Deployments Fly.</h2>
+    <h2>Master the art of <span class="highlight">Code → Build → Deploy → Scale</span></h2>
 
-<form action="/action_page.php">
-  <div class="container">
-    <h1>Register</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
+    <!-- Infinity Loop Animation -->
+    <div class="infinity-wrapper">
+        <div class="loop"></div>
+        <div class="label"><span>Code</span></div>
+        <div class="label"><span>Build</span></div>
+        <div class="label"><span>Test</span></div>
+        <div class="label"><span>Deploy</span></div>
+        <div class="label"><span>Monitor</span></div>
+        <div class="label"><span>Repeat</span></div>
+    </div>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <div class="cta">
+        <p>✅ JSP environment is live and futuristic!</p>
+        <p>Experience the Servlet in action 👇</p>
+        <a href="<%= request.getContextPath() %>/hello">
+            Launch Servlet
+        </a>
+    </div>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-    <hr>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-
-    <button type="submit" class="registerbtn">Register</button>
-  </div>
-  
-  <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
-  </div>
-</form>
-
+    <footer>
+        <p>© <%= java.time.Year.now() %> NIT Academy | Built with ⚙️ Automation & 💡 Innovation</p>
+    </footer>
 </body>
 </html>
